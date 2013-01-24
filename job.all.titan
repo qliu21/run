@@ -1,0 +1,18 @@
+#PBS -q debug
+#PBS -l mppwidth=240
+#PBS -l walltime=00:30:00
+#PBS -N READAIO
+#PBS -e READAIO.$PBS_JOBID.err
+#PBS -o READAIO.$PBS_JOBID.out
+#PBS -V
+
+cd $PBS_O_WORKDIR
+
+rm -f *.bp READAIO.*.err READAIO.*.out
+
+for (( c=1; c<=50; c++ ))
+do
+ aprun -n 240 ./adios_global
+ aprun -n 240 ./adios_read_aio
+ rm -f *.bp
+done
