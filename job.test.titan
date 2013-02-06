@@ -1,0 +1,18 @@
+#PBS -A stf006
+##PBS -q debug
+#PBS -l nodes=1
+#PBS -l walltime=02:00:00
+#PBS -N TEST
+#PBS -e TESTIO.$PBS_JOBID.err
+#PBS -o TESTIO.$PBS_JOBID.out
+#PBS -V
+
+cd $PBS_O_WORKDIR
+
+rm -f TESTIO.*.err TESTIO.*.out
+
+for (( c=1; c<=100; c++ ))
+do
+ rm -f *.h5
+ aprun -n 1 ./test_ost_speed
+done
