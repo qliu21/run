@@ -1,0 +1,28 @@
+#PBS -A stf006
+##PBS -q debug
+#PBS -l nodes=64
+#PBS -l walltime=2:00:00
+#PBS -N AIO
+#PBS -e AIO.$PBS_JOBID.err
+#PBS -o AIO.$PBS_JOBID.out
+#PBS -V
+
+cd $PBS_O_WORKDIR
+export threshold=0.1
+
+rm -f *.bp READAIO.*.err READAIO.*.out
+
+for (( c=1; c<=1000; c++ ))
+do
+ rm -f *.bp
+ cp adios_global.xml.no.adaptive adios_global.xml
+ date
+ aprun -n 1024 ./adios_global
+
+ rm -f *.bp
+ cp adios_global.xml.adaptive adios_global.xml
+ date
+ aprun -n 1024 ./adios_global
+done
+
+date
