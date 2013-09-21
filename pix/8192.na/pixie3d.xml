@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<adios-config host-language="C">
+    <adios-group name="temperature" coordination-communicator="comm">
+    <var name="NX" type="integer"/>
+    <var name="NY" type="integer"/>
+    <var name="NZ" type="integer"/>
+
+    <var name="Var0" type="double" dimensions="NZ,NY,NX"/>
+    <var name="Var1" type="double" dimensions="NZ,NY,NX"/>
+    <var name="Var2" type="double" dimensions="NZ,NY,NX"/>
+    <var name="Var3" type="double" dimensions="NZ,NY,NX"/>
+    <var name="Var4" type="double" dimensions="NZ,NY,NX"/>
+    <var name="Var5" type="double" dimensions="NZ,NY,NX"/>
+    <var name="Var6" type="double" dimensions="NZ,NY,NX"/>
+    <var name="Var7" type="double" dimensions="NZ,NY,NX"/>
+</adios-group>
+
+<method group="temperature" method="AIO">adaptive=0;num_subfiles=16</method>
+
+<buffer size-MB="4" allocate-time="now"/>
+
+</adios-config>
+
